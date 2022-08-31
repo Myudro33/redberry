@@ -1,8 +1,12 @@
 import React from 'react'
+import Link from 'react-router-dom'
+import {AiOutlineLeft} from 'react-icons/ai'
 
 const AddNew = () => {
   return (
-    <div>AddNew</div>
+    <div>
+   <AiOutlineLeft/>
+    </div>
   )
 }
 

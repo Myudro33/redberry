@@ -14,7 +14,7 @@ const Landing = () => {
       <Link to={"/add-new"}>
         <Button styyle={"md:mt-24 xs:mt-28 md:text-base m-5 xs:w-80 xs:h-14 md:h-10 md:w-72 xs:text-xl"} title={"ჩანაწერის დამატება"} />
       </Link>
-      <Link to={"/list"}>
+      <Link to={'/list'}>
         <Button title={"ჩანაწერების სია"} styyle={"md:w-72 md:text-base md:h-10 xs:w-80 xs:h-14 xs:text-xl"} />
       </Link>
     </div>

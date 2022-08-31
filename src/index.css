@@ -2,7 +2,7 @@
   font-family: "Helvetica";
   src: local("Helvetica"),
     url("./fonts/Helvetica/HelveticaNeue-01.ttf") format("truetype");
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 @tailwind base;

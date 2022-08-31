@@ -13,6 +13,9 @@ const AddNew = () => {
   const [positions, setPositions] = useState();
   const [teamId, setTeamId] = useState();
   useEffect(() => {
+
+
+    // ჯგუფების ჩამონათვალი
     axios
       .get("https://pcfy.redberryinternship.ge/api/teams")
       .then((response) => {
@@ -20,24 +23,25 @@ const AddNew = () => {
         setTeams(teams);
       });
 
+    //   პოზიციების ჩამონათვალი
     axios
       .get("https://pcfy.redberryinternship.ge/api/positions")
       .then((response) => {
         const positions = response.data;
         setPositions(positions);
       });
-    console.log(positions);
   }, []);
 
+//   ჯგუფის შესაბამისი პოზიციების ჩამონათვალი
   const setPosition = (e) => {
     console.log(e.target.value);
-    if (e.target.value == "დეველოპერი") {
+    if (e.target.value === "დეველოპერი") {
       setTeamId(1);
-    } else if (e.target.value == "HR") {
+    } else if (e.target.value === "HR") {
       setTeamId(2);
-    } else if (e.target.value == "გაყიდვები") {
+    } else if (e.target.value === "გაყიდვები") {
       setTeamId(3);
-    } else if (e.target.value == "დიზაინი") {
+    } else if (e.target.value === "დიზაინი") {
       setTeamId(4);
     } else {
       setTeamId(5);
@@ -109,7 +113,7 @@ const AddNew = () => {
                 პოზიცია
               </option>
               {positions?.data
-                .filter((pos) => pos.team_id == teamId)
+                .filter((pos) => pos.team_id === teamId)
                 .map((position) => (
                   <option key={position.id}>{position.name}</option>
                 ))}

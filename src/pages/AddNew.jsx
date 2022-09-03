@@ -91,7 +91,7 @@ const AddNew = () => {
       );
     }
     else{
-      window.location='/list'
+      window.location='/laptop-data'
     }
   };
 

@@ -6,14 +6,13 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import axios from "axios";
 import "../App.css";
+import Vector from '../assets/Vector.png'
 
 const LaptopData = () => {
   const file = useRef();
-  const date = useRef();
   const [brands, setbrands] = useState();
   const [cpus, setcpus] = useState();
-  const [alo, setalo] = useState(false);
-
+ 
   useEffect(() => {
     // cpus
     axios
@@ -52,25 +51,25 @@ const LaptopData = () => {
         <div className="md:flex md:m-auto xs:ml-14">
           <p
             style={{ fontFamily: "Helvetica" }}
-            className=" mx-4 font-extrabold   h-8"
+            className=" mx-4 font-extrabold   h-8 md:block xs:hidden"
           >
             თანამშრომლის ინფო
           </p>
           <p
             style={{ fontFamily: "Helvetica" }}
-            className="mx-6 h-8 md:border-b-black md:block font-extrabold md:border-b-2 xs:hidden"
+            className="mx-6 h-8 md:border-b-black md:block font-extrabold md:border-b-2 xs:border-b-4 xs:m-0 xs:mt-4 md:mt-0"
           >
             ლეპტოპის მახასიათებლები
           </p>
-          <p className="md:hidden flex justify-center  m-0 p-0">1/2</p>
+          <p className="md:hidden flex justify-center  m-0 p-0">2/2</p>
         </div>
       </div>
-      <div className="md:w-3/4 xs:w-11/12 h-[1350px] rounded-md bg-white  flex mb-10 justify-center">
+      <div className="md:w-3/4 xs:w-11/12 md:h-[1350px] xs:h-[1500px] rounded-md bg-white  flex mb-10 justify-center">
         <div className="md:w-3/4 xs:w-full h-full   flex flex-col">
           <div className="w-full h-full">
             <div
               onClick={handleChange}
-              className="w-full flex cursor-pointer flex-col justify-center items-center md:h-[350px] mt-10 border-[3px]  border-[#62A1EB] border-dashed rounded-xl"
+              className="w-full flex cursor-pointer flex-col justify-center items-center md:h-[350px] xs:h-72 mt-10 border-[3px]  border-[#62A1EB] border-dashed rounded-xl"
             >
               <input
                 onChange={getPhoto}
@@ -80,22 +79,23 @@ const LaptopData = () => {
                 name=""
                 id=""
               />
-              <p className="text-center text-[#62A1EB]">
+              <p className="text-center text-[#62A1EB] xs:hidden md:block">
                 ჩააგდე ან ატვირთე <br />
                 ლეპტოპის ფოტო
               </p>
-              <Button title={"ატვირთე"} styyle={"w-40 mt-12"} />
+              <Button title={"ატვირთე"} styyle={"w-40 mt-12 md:block xs:hidden"} />
+              <img className="md:hidden xs:block" src={Vector} alt="vector" />
+              <p className="md:hidden xs:block text-center text-[#4386A9] xs:mt-4">ლეპტოპის ფოტოს <br/>ატვირთვა</p>
             </div>
-
-            <div className="w-full h-48  border-b-2  border-b-gray-300 flex justify-between items-center">
-              <label htmlFor="inp" className={`w-[45%]`}>
+            <div className="w-full md:h-48 xs:h-52   md:border-b-2 xs:border-b-4  border-b-gray-300 flex xs:flex-col md:flex-row md:justify-between xs:justify-around items-center">
+              <label htmlFor="inp" className={`md:w-[45%] xs:w-full`}>
                 ლეპტოპის სახელი
-                <Input type={"text"} placeholder="HP" styyle={"w-full"} />
+                <Input type={"text"} placeholder="HP" styyle={"w-full xs:h-14 md:h-11"} />
                 <p className={`text-xs text-gray-500`}>
                   ლათინური ასოები, ციფრები, !@#$%^&*()_+=
                 </p>
               </label>
-              <select className="w-[45%] h-11 bg-gray-200 mt-2 border-[2px] p-2  rounded-md focus:border-none border-none focus:outline-none">
+              <select className="md:w-[45%] xs:w-full md:h-11 xs:h-14 bg-gray-200 mt-2 border-[2px] p-2  rounded-md focus:border-none border-none focus:outline-none">
                 <option selected disabled value="ლეპტოპის ბრენდი">
                   ლეპტოპის ბრენდი
                 </option>
@@ -107,11 +107,11 @@ const LaptopData = () => {
               </select>
             </div>
 
-            <div className="w-full flex h-40 items-center justify-between">
+            <div className="w-full flex md:flex-row xs:flex-col md:h-40 xs:h-80 md:mt-0 xs:mt-4 items-center xs:justify-between justify-between">
               <select
                 name=""
                 id=""
-                className="h-11 w-[30%] mt-2 bg-gray-200  border-[2px] p-2  rounded-md focus:border-none border-none focus:outline-none"
+                className="md:h-11 xs:h-14 md:w-[30%] xs:w-full mt-2 bg-gray-200  border-[2px] p-2  rounded-md focus:border-none border-none focus:outline-none"
               >
                 <option disabled selected value="CPU">
                   CPU
@@ -122,24 +122,24 @@ const LaptopData = () => {
                   </option>
                 ))}
               </select>
-              <label htmlFor="" className="w-[30%]">
+              <label htmlFor="" className="md:w-[30%] xs:w-full">
                 CPU-ს ბირთვი
-                <Input placeholder={"14"} styyle={"w-full"} type="text" />
+                <Input placeholder={"14"} styyle={"w-full md:h-11 xs:h-14"} type="text" />
                 <p className="text-xs text-gray-500">მხოლოდ ციფრები</p>
               </label>
-              <label htmlFor="" className="w-[30%]">
+              <label htmlFor="" className="md:w-[30%] xs:w-full">
                 CPU-ს ნაკადი
-                <Input placeholder={"365"} styyle={"w-full"} type="text" />
+                <Input placeholder={"365"} styyle={"w-full md:h-11 xs:h-14"} type="text" />
                 <p className="text-xs text-gray-500">მხოლოდ ციფრები</p>
               </label>
             </div>
-            <div className="w-full h-48  border-b-2  border-b-gray-300 flex justify-between items-center">
-              <label htmlFor="" className="w-[45%]">
+            <div className="w-full h-48  md:border-b-2 xs:border-b-4 md:my-0 xs:my-6 border-b-gray-300 flex md:flex-row xs:flex-col justify-between items-center">
+              <label htmlFor="" className="md:w-[45%] xs:w-full">
                 ლეპტოპის RAM(GB)
-                <Input placeholder={"365"} styyle={"w-full"} type="text" />
+                <Input placeholder={"365"} styyle={"w-full md:h-11 xs:h-14"} type="text" />
                 <p className="text-xs text-gray-500">მხოლოდ ციფრები</p>
               </label>
-              <div className="w-[45%] ">
+              <div className="md:w-[45%] xs:w-full ">
                 <h6>მეხსიერების ტიპი</h6>
                 <label className="font-light">
                   <input
@@ -161,18 +161,19 @@ const LaptopData = () => {
                 </label>
               </div>
             </div>
-            <div className="w-full h-48 flex justify-between items-center">
-              <label htmlFor="" className="w-[45%]">
+            <div className="w-full h-48 flex md:flex-row xs:flex-col justify-between items-center">
+              <label htmlFor="" className="md:w-[45%] xs:w-full">
                 შეძენის რიცხვი
-                <Input type={"date"} styyle="w-full text-gray-400" />
+                <Input type={"date"} styyle="w-full text-gray-400 md:h-11 xs:h-14" />
               </label>
-              <label htmlFor="" className="w-[45%] mt-2">
+              <label htmlFor="" className="md:w-[45%] xs:w-full mt-4">
                 ლეპტოპის ფასი
-                <Input type={"text"} placeholder="0000" styyle="w-full" />
-                <p className="text-xs text-gray-400">მხოლოდ ციფრები</p>
+                <Input type={"text"} placeholder="0000" styyle="w-full md:h-11 xs:h-14" />
+                <p className="relative bottom-8 md:left-[355px] xs:left-0 xs:ml-[330px] md:ml-0 text-gray-500 m-0 p-0">₾</p>
+                <p className="text-xs text-gray-400 mt-[-20px]">მხოლოდ ციფრები</p>
               </label>
             </div>
-            <div className="w-[45%] mt-6">
+            <div className="md:w-[45%] xs:w-full mt-6">
               <h6>ლეპტოპის მდგომარეობა</h6>
               <label className="font-light">
                 <input
@@ -193,10 +194,12 @@ const LaptopData = () => {
                 მეორადი
               </label>
             </div>
-          <div className="flex justify-between items-center mt-10">
-            <a className="text-[#62A1EB]" href="/add-new">უკან</a>
-            <Button styyle={'w-44 h-12'} title={'დამახსოვრება'} />
-          </div>
+            <div className="flex justify-between items-center mt-10">
+              <a className="text-[#62A1EB]" href="/add-new">
+                უკან
+              </a>
+              <Button styyle={"w-44 h-12"} title={"დამახსოვრება"} />
+            </div>
           </div>
         </div>
       </div>

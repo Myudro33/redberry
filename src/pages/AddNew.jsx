@@ -12,6 +12,7 @@ const AddNew = () => {
   const [teams, setTeams] = useState();
   const [positions, setPositions] = useState();
   const [teamId, setTeamId] = useState();
+  const [positionId, setpositionId] = useState()
   const [firstP, setFirstP] = useState("მინიმუმ 2 სიმბოლო, ქართული ასოები");
   const [firstLabel, setfirstLabel] = useState("");
   const [firstInput, setfirstInput] = useState("");
@@ -30,7 +31,7 @@ const AddNew = () => {
   const firstSelect = useRef();
   const mobileEmail = useRef();
 
-  console.log(mobileEmail);
+  const [finalData, setfinalData] = useState({})
 
   useEffect(() => {
     // ჯგუფების ჩამონათვალი
@@ -51,6 +52,7 @@ const AddNew = () => {
   }, []);
 
   const submitForm = () => {
+    console.log(positionId);
     const georgianRegex = /^[ა-ჰ]+$/;
     const georgianNumberRegex = /^(\+?995)?(79\d{7}|5\d{8})$/;
     if (inp.current?.value.length < 2) {
@@ -190,6 +192,7 @@ const AddNew = () => {
               ))}
             </select>
             <select
+            
               onChange={() => {
                 setselect2(true);
               }}
@@ -201,7 +204,9 @@ const AddNew = () => {
               {positions?.data
                 .filter((pos) => pos.team_id === teamId)
                 .map((position) => (
-                  <option key={position.id}>{position.name}</option>
+                  <option onClick={()=>
+                    setpositionId(position.id)
+                  }  key={position.id}>{position.name}</option>
                 ))}
             </select>
             <label className={`font-bold ${emailTextStyle}`} htmlFor="mail">

@@ -4,6 +4,7 @@ import AddNew from "./pages/AddNew";
 import Landing from "./pages/Landing";
 import LaptopData from "./pages/LaptopData";
 import List from "./pages/List";
+import Success from "./pages/Success";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/add-new" element={<AddNew />} />
         <Route path="/laptop-data" element={<LaptopData />} />
+        <Route path="/success" element={<Success/>}/>
         <Route path="/list" element={<List />} />
       </Routes>
     </div>

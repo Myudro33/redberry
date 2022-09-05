@@ -18,11 +18,24 @@ const LaptopData = () => {
   const [laptopNameStyle, setlaptopNameStyle] = useState("text-gray-500");
   const [laptopBrand, setlaptopBrand] = useState(false);
   const [laptopBrandStyle, setlaptopBrandStyle] = useState("");
-  const [cpu, setCpu] = useState(false)
-  const [cpuStyle, setcpuStyle] = useState('')
+  const [cpu, setCpu] = useState(false);
+  const [cpuStyle, setcpuStyle] = useState("");
+  const [cpuBirtvi, setcpuBirtvi] = useState("text-gray-500");
+  const [cpuNakadi, setcpuNakadi] = useState("text-gray-500");
+  const [ramStyle, setramStyle] = useState("text-gray-500");
+  const [storageStyle, setstorageStyle] = useState(false);
+  const [storageSty, setstorageSty] = useState("");
+  const [dateStyle, setdateStyle] = useState("");
+  const [priceStyle, setpriceStyle] = useState("text-gray-500");
+  const [condition, setcondition] = useState(false)
+  const [conditionText, setconditionText] = useState('')
 
   const laptopName = useRef();
-  console.log(laptopName);
+  const cpuRef = useRef();
+  const cpuNakadiRef = useRef();
+  const ramRef = useRef();
+  const dateRef = useRef();
+  const priceRef = useRef();
   useEffect(() => {
     // cpus
     axios
@@ -44,24 +57,65 @@ const LaptopData = () => {
 
   const submitHandler = () => {
     const regex = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
+    const numbersRegex = /^[0-9]*$/;
 
     if (photo === "") {
-      console.log(photo);
       setphotoStyle("border-red-400 bg-red-100");
       setphotoText("text-red-500");
-    } else if (!laptopName.current.value.match(regex)) {
+    } else if (
+      laptopName.current.value === "" &&
+      !laptopName.current.value.match(regex)
+    ) {
       setlaptopNameStyle(
         "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
       );
     } else if (!laptopBrand) {
       setlaptopBrandStyle("border-red-500");
-    }
-    else if(!cpu){
-      setcpuStyle('border-red-500')
+    } else if (!cpu) {
+      setcpuStyle("border-red-500");
+    } else if (cpuRef?.current.value === "") {
+      setcpuBirtvi(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (!cpuRef.current.value.match(numbersRegex)) {
+      setcpuBirtvi(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (!cpuNakadiRef.current.value.match(numbersRegex)) {
+      setcpuNakadi(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (cpuNakadiRef.current.value === "") {
+      setcpuNakadi(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (!ramRef.current.value.match(numbersRegex)) {
+      setramStyle(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (ramRef.current.value === "") {
+      setramStyle(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (!storageStyle) {
+      setstorageSty("text-red-500");
+    } else if (dateRef.current.value === "") {
+      setdateStyle("text-red-500 border-red-500");
+    } else if (priceRef.current.value === "") {
+      setpriceStyle(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    } else if (!priceRef.current.value.match(numbersRegex)) {
+      setpriceStyle(
+        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
+      );
+    }else if(!condition){
+         setconditionText('text-red-500')
+    }else{
+      window.location='/success'
     }
   };
   const handleChange = () => {
-    console.log(file);
     file.current.click();
   };
   const getPhoto = (e) => {
@@ -85,7 +139,7 @@ const LaptopData = () => {
           </p>
           <p
             style={{ fontFamily: "Helvetica" }}
-            className="mx-6 h-8 md:border-b-black md:block font-extrabold md:border-b-2 xs:border-b-4 xs:m-0 xs:mt-4 md:mt-0"
+            className="mx-6 h-8 md:border-b-black md:block font-extrabold md:border-b-2 xs:border-b-0  xs:m-0 xs:mt-4 md:mt-0"
           >
             ლეპტოპის მახასიათებლები
           </p>
@@ -173,39 +227,46 @@ const LaptopData = () => {
                   </option>
                 ))}
               </select>
-              <label htmlFor="" className="md:w-[30%] xs:w-full">
+              <label
+                htmlFor=""
+                className={`md:w-[30%] xs:w-full  ${cpuBirtvi}`}
+              >
                 CPU-ს ბირთვი
                 <Input
+                  connect={cpuRef}
                   placeholder={"14"}
-                  styyle={"w-full md:h-11 xs:h-14"}
+                  styyle={`w-full md:h-11 xs:h-14 ${cpuBirtvi}`}
                   type="text"
                 />
-                <p className="text-xs text-gray-500">მხოლოდ ციფრები</p>
+                <p className={`text-xs ${cpuBirtvi}`}>მხოლოდ ციფრები</p>
               </label>
-              <label htmlFor="" className="md:w-[30%] xs:w-full">
+              <label htmlFor="" className={`md:w-[30%] xs:w-full ${cpuNakadi}`}>
                 CPU-ს ნაკადი
                 <Input
+                  connect={cpuNakadiRef}
                   placeholder={"365"}
-                  styyle={"w-full md:h-11 xs:h-14"}
+                  styyle={`w-full md:h-11 xs:h-14 ${cpuNakadi}`}
                   type="text"
                 />
-                <p className="text-xs text-gray-500">მხოლოდ ციფრები</p>
+                <p className={`text-xs ${cpuNakadi}`}>მხოლოდ ციფრები</p>
               </label>
             </div>
             <div className="w-full h-48  md:border-b-2 xs:border-b-4 md:my-0 xs:my-6 border-b-gray-300 flex md:flex-row xs:flex-col justify-between items-center">
-              <label htmlFor="" className="md:w-[45%] xs:w-full">
+              <label htmlFor="" className={`md:w-[45%] xs:w-full ${ramStyle}`}>
                 ლეპტოპის RAM(GB)
                 <Input
+                  connect={ramRef}
                   placeholder={"365"}
-                  styyle={"w-full md:h-11 xs:h-14"}
+                  styyle={`w-full md:h-11 xs:h-14 ${ramStyle}`}
                   type="text"
                 />
-                <p className="text-xs text-gray-500">მხოლოდ ციფრები</p>
+                <p className={`text-xs ${ramStyle}`}>მხოლოდ ციფრები</p>
               </label>
               <div className="md:w-[45%] xs:w-full ">
-                <h6>მეხსიერების ტიპი</h6>
+                <h6 className={storageSty}>მეხსიერების ტიპი</h6>
                 <label className="font-light">
                   <input
+                    onClick={() => setstorageStyle(true)}
                     className="my-5 mr-2 scale-125"
                     type="radio"
                     name="type"
@@ -215,6 +276,7 @@ const LaptopData = () => {
                 </label>
                 <label className="font-light">
                   <input
+                    onClick={() => setstorageStyle(true)}
                     type="radio"
                     className="my-5 scale-125 outline-[#62A1EB] ml-8 mr-2"
                     name="type"
@@ -225,32 +287,40 @@ const LaptopData = () => {
               </div>
             </div>
             <div className="w-full h-48 flex md:flex-row xs:flex-col justify-between items-center">
-              <label htmlFor="" className="md:w-[45%] xs:w-full">
+              <label htmlFor="" className={`md:w-[45%] xs:w-full ${dateStyle}`}>
                 შეძენის რიცხვი
                 <Input
+                  connect={dateRef}
                   type={"date"}
-                  styyle="w-full text-gray-400 md:h-11 xs:h-14"
+                  styyle={`w-full text-gray-400 md:h-11 xs:h-14 ${dateStyle}`}
                 />
               </label>
-              <label htmlFor="" className="md:w-[45%] xs:w-full mt-4">
+              <label
+                htmlFor=""
+                className={`md:w-[45%] xs:w-full mt-4 ${priceStyle}`}
+              >
                 ლეპტოპის ფასი
                 <Input
+                  connect={priceRef}
                   type={"text"}
                   placeholder="0000"
-                  styyle="w-full md:h-11 xs:h-14"
+                  styyle={`w-full md:h-11 xs:h-14  ${priceStyle}`}
                 />
-                <p className="relative bottom-8 md:left-[355px] xs:left-0 xs:ml-[330px] md:ml-0 text-gray-500 m-0 p-0">
+                <p
+                  className={`relative bottom-8 md:left-[355px] xs:left-0 xs:ml-[330px] md:ml-0 text-gray-500 m-0 p-0`}
+                >
                   ₾
                 </p>
-                <p className="text-xs text-gray-400 mt-[-20px]">
+                <p className={`text-xs mt-[-20px] ${priceStyle}`}>
                   მხოლოდ ციფრები
                 </p>
               </label>
             </div>
             <div className="md:w-[45%] xs:w-full mt-6">
-              <h6>ლეპტოპის მდგომარეობა</h6>
+              <h6 className={conditionText}>ლეპტოპის მდგომარეობა</h6>
               <label className="font-light">
                 <input
+                onClick={()=>setcondition(true)}
                   className="my-5 mr-2 scale-125"
                   type="radio"
                   name="condition"
@@ -260,6 +330,7 @@ const LaptopData = () => {
               </label>
               <label className="font-light">
                 <input
+                onClick={()=>setcondition(true)}
                   type="radio"
                   className="my-5 scale-125 outline-[#62A1EB] ml-8 mr-2"
                   name="condition"

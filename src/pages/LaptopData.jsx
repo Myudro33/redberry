@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineLeft } from "react-icons/ai";
 import Logo from "../assets/LOGO-10 2.png";
@@ -6,36 +6,24 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import axios from "axios";
 import "../App.css";
-import Vector from "../assets/Vector.png";
+import ImageUploading from "react-images-uploading";
 
 const LaptopData = () => {
-  const file = useRef();
   const [brands, setbrands] = useState();
+  const [brandId, setbrandId] = useState();
   const [cpus, setcpus] = useState();
-  const [photo, setPhoto] = useState("");
-  const [photoStyle, setphotoStyle] = useState();
-  const [photoText, setphotoText] = useState("text-[#62A1EB]");
-  const [laptopNameStyle, setlaptopNameStyle] = useState("text-gray-500");
-  const [laptopBrand, setlaptopBrand] = useState(false);
-  const [laptopBrandStyle, setlaptopBrandStyle] = useState("");
-  const [cpu, setCpu] = useState(false);
-  const [cpuStyle, setcpuStyle] = useState("");
-  const [cpuBirtvi, setcpuBirtvi] = useState("text-gray-500");
-  const [cpuNakadi, setcpuNakadi] = useState("text-gray-500");
-  const [ramStyle, setramStyle] = useState("text-gray-500");
-  const [storageStyle, setstorageStyle] = useState(false);
-  const [storageSty, setstorageSty] = useState("");
-  const [dateStyle, setdateStyle] = useState("");
-  const [priceStyle, setpriceStyle] = useState("text-gray-500");
-  const [condition, setcondition] = useState(false)
-  const [conditionText, setconditionText] = useState('')
 
-  const laptopName = useRef();
-  const cpuRef = useRef();
-  const cpuNakadiRef = useRef();
-  const ramRef = useRef();
-  const dateRef = useRef();
-  const priceRef = useRef();
+  const data = JSON.parse(localStorage.getItem("data"));
+  console.log(data);
+  const [store, setstore] = useState({});
+  const [images, setImages] = React.useState([]);
+  const maxNumber = 1;
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
+
   useEffect(() => {
     // cpus
     axios
@@ -55,71 +43,34 @@ const LaptopData = () => {
       });
   }, []);
 
-  const submitHandler = () => {
-    const regex = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
-    const numbersRegex = /^[0-9]*$/;
-
-    if (photo === "") {
-      setphotoStyle("border-red-400 bg-red-100");
-      setphotoText("text-red-500");
-    } else if (
-      laptopName.current.value === "" &&
-      !laptopName.current.value.match(regex)
-    ) {
-      setlaptopNameStyle(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (!laptopBrand) {
-      setlaptopBrandStyle("border-red-500");
-    } else if (!cpu) {
-      setcpuStyle("border-red-500");
-    } else if (cpuRef?.current.value === "") {
-      setcpuBirtvi(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (!cpuRef.current.value.match(numbersRegex)) {
-      setcpuBirtvi(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (!cpuNakadiRef.current.value.match(numbersRegex)) {
-      setcpuNakadi(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (cpuNakadiRef.current.value === "") {
-      setcpuNakadi(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (!ramRef.current.value.match(numbersRegex)) {
-      setramStyle(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (ramRef.current.value === "") {
-      setramStyle(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (!storageStyle) {
-      setstorageSty("text-red-500");
-    } else if (dateRef.current.value === "") {
-      setdateStyle("text-red-500 border-red-500");
-    } else if (priceRef.current.value === "") {
-      setpriceStyle(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    } else if (!priceRef.current.value.match(numbersRegex)) {
-      setpriceStyle(
-        "focus:outline-red-500 focus:border-red-500 border-red-500 text-red-500"
-      );
-    }else if(!condition){
-         setconditionText('text-red-500')
-    }else{
-      window.location='/success'
+  const getBrandId = (e) => {
+    if (e === "HP") {
+      setbrandId(1);
+    } else if (e === "Dell") {
+      setbrandId(2);
+    } else if (e === "Microsoft") {
+      setbrandId(3);
+    } else if (e === "Apple") {
+      setbrandId(4);
+    } else if (e === "Lenovo") {
+      setbrandId(5);
+    } else if (e === "Acer") {
+      setbrandId(6);
     }
   };
-  const handleChange = () => {
-    file.current.click();
-  };
-  const getPhoto = (e) => {
-    setPhoto(e.target.files[0]);
+  const submitHandler = () => {
+    // const regex = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
+    // const numbersRegex = /^[0-9]*$/;
+    // setstore(form);
+    // console.log([...form.forEach()])
+    // setstore((store) => ({ ...store, ...data }));
+    // console.log(store);
+    // axios
+    //   .post("https://pcfy.redberryinternship.ge/api/laptop/create", store)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   return (
@@ -150,55 +101,92 @@ const LaptopData = () => {
         <div className="md:w-3/4 xs:w-full h-full   flex flex-col">
           <div className="w-full h-full">
             <div
-              onClick={handleChange}
-              className={`w-full flex cursor-pointer flex-col justify-center items-center md:h-[350px] xs:h-72 mt-10 border-[3px] 
-              border-[#62A1EB]
-              ${photoStyle}
-               border-dashed rounded-xl`}
+              className={`w-full flex cursor-pointer flex-col justify-center items-center md:h-[350px] xs:h-72 mt-10`}
             >
-              <input
-                onChange={getPhoto}
-                type="file"
-                hidden
-                ref={file}
-                name=""
-                id=""
-              />
-              <p className={`text-center ${photoText}  xs:hidden md:block`}>
-                ჩააგდე ან ატვირთე <br />
-                ლეპტოპის ფოტო
-              </p>
-              <Button
-                title={"ატვირთე"}
-                styyle={"w-40 mt-12 md:block xs:hidden"}
-              />
-              <img className="md:hidden xs:block" src={Vector} alt="vector" />
-              <p
-                className={`md:hidden ${photoText} xs:block text-center  xs:mt-4`}
-              >
-                ლეპტოპის ფოტოს <br />
-                ატვირთვა
-              </p>
+              <div className="App w-full h-full">
+                <ImageUploading
+                  encType="multipart/form-data"
+                  multiple
+                  value={images}
+                  onChange={onChange}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                >
+                  {({
+                    imageList,
+                    onImageUpload,
+                    onImageRemoveAll,
+                    onImageUpdate,
+                    onImageRemove,
+                    isDragging,
+                    dragProps,
+                  }) => (
+                    // write your building UI
+                    <div
+                      onClick={onImageUpload}
+                      {...dragProps}
+                      className={`upload__image-wrapper border-[3px] 
+                     border-dashed rounded-xl w-full h-full ${
+                       isDragging ? "border-red-500" : "border-[#62A1EB]"
+                     } flex flex-col items-center justify-center `}
+                    >
+                      <button onClick={onImageUpload} {...dragProps}>
+                        ჩააგდე ან ატვირთე <br /> ლეპტოპის ფოტო
+                      </button>
+                      &nbsp;
+                      <Button
+                        click={onImageRemoveAll}
+                        styyle={`w-1/5 h-12 ${
+                          imageList.length > 0 ? "hidden" : "block"
+                        }`}
+                        title={"ატვირთე"}
+                      />
+                      {imageList.map((image, index) => (
+                        <div
+                          key={index}
+                          className="image-item w-full flex flex-col items-center"
+                        >
+                          <img
+                            src={image["data_url"]}
+                            alt=""
+                            className="w-28"
+                          />
+                          <div className="image-item__btn-wrapper">
+                            <Button
+                              title={"განახლება"}
+                              styyle={"h-9 m-1 text-sm w-28"}
+                              click={() => onImageUpdate(index)}
+                            />
+                            <Button
+                              title={"წაშლა"}
+                              styyle={"h-9 m-1 text-sm w-28"}
+                              click={() => onImageRemove(index)}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </ImageUploading>
+              </div>
             </div>
             <div className="w-full md:h-48 xs:h-52   md:border-b-2 xs:border-b-4  border-b-gray-300 flex xs:flex-col md:flex-row md:justify-between xs:justify-around items-center">
-              <label
-                htmlFor="inp"
-                className={`md:w-[45%] xs:w-full ${laptopNameStyle}`}
-              >
+              <label htmlFor="inp" className={`md:w-[45%] xs:w-full`}>
                 ლეპტოპის სახელი
                 <Input
-                  connect={laptopName}
                   type={"text"}
                   placeholder="HP"
-                  styyle={`w-full xs:h-14 md:h-11 ${laptopNameStyle}`}
+                  styyle={`w-full xs:h-14 md:h-11`}
                 />
-                <p className={`text-xs ${laptopNameStyle}`}>
+                <p className={`text-xs`}>
                   ლათინური ასოები, ციფრები, !@#$%^&*()_+=
                 </p>
               </label>
               <select
-                onChange={() => setlaptopBrand(true)}
-                className={`md:w-[45%] xs:w-full bg-gray-200 md:h-11 xs:h-14 ${laptopBrandStyle} mt-2 border-2 p-2  rounded-md  focus:outline-none`}
+                onChange={(e) => {
+                  getBrandId(e.target.value);
+                }}
+                className={`md:w-[45%] xs:w-full bg-gray-200 md:h-11 xs:h-14  mt-2 border-2 p-2  rounded-md  focus:outline-none`}
               >
                 <option selected disabled value="ლეპტოპის ბრენდი">
                   ლეპტოპის ბრენდი
@@ -213,10 +201,9 @@ const LaptopData = () => {
 
             <div className="w-full flex md:flex-row xs:flex-col md:h-40 xs:h-80 md:mt-0 xs:mt-4 items-center xs:justify-between justify-between">
               <select
-                onChange={() => setCpu(true)}
                 name=""
                 id=""
-                className={`md:h-11 xs:h-14 md:w-[30%] xs:w-full mt-2 bg-gray-200  border-[2px] p-2 ${cpuStyle}  rounded-md  focus:outline-none `}
+                className={`md:h-11 xs:h-14 md:w-[30%] xs:w-full mt-2 bg-gray-200  border-[2px] p-2   rounded-md  focus:outline-none `}
               >
                 <option disabled selected value="CPU">
                   CPU
@@ -227,46 +214,39 @@ const LaptopData = () => {
                   </option>
                 ))}
               </select>
-              <label
-                htmlFor=""
-                className={`md:w-[30%] xs:w-full  ${cpuBirtvi}`}
-              >
+              <label htmlFor="" className={`md:w-[30%] xs:w-full `}>
                 CPU-ს ბირთვი
                 <Input
-                  connect={cpuRef}
                   placeholder={"14"}
-                  styyle={`w-full md:h-11 xs:h-14 ${cpuBirtvi}`}
+                  styyle={`w-full md:h-11 xs:h-14 `}
                   type="text"
                 />
-                <p className={`text-xs ${cpuBirtvi}`}>მხოლოდ ციფრები</p>
+                <p className={`text-xs `}>მხოლოდ ციფრები</p>
               </label>
-              <label htmlFor="" className={`md:w-[30%] xs:w-full ${cpuNakadi}`}>
+              <label htmlFor="" className={`md:w-[30%] xs:w-full`}>
                 CPU-ს ნაკადი
                 <Input
-                  connect={cpuNakadiRef}
                   placeholder={"365"}
-                  styyle={`w-full md:h-11 xs:h-14 ${cpuNakadi}`}
+                  styyle={`w-full md:h-11 xs:h-14 `}
                   type="text"
                 />
-                <p className={`text-xs ${cpuNakadi}`}>მხოლოდ ციფრები</p>
+                <p className={`text-xs `}>მხოლოდ ციფრები</p>
               </label>
             </div>
             <div className="w-full h-48  md:border-b-2 xs:border-b-4 md:my-0 xs:my-6 border-b-gray-300 flex md:flex-row xs:flex-col justify-between items-center">
-              <label htmlFor="" className={`md:w-[45%] xs:w-full ${ramStyle}`}>
+              <label htmlFor="" className={`md:w-[45%] xs:w-full `}>
                 ლეპტოპის RAM(GB)
                 <Input
-                  connect={ramRef}
                   placeholder={"365"}
-                  styyle={`w-full md:h-11 xs:h-14 ${ramStyle}`}
+                  styyle={`w-full md:h-11 xs:h-14 `}
                   type="text"
                 />
-                <p className={`text-xs ${ramStyle}`}>მხოლოდ ციფრები</p>
+                <p className={`text-xs `}>მხოლოდ ციფრები</p>
               </label>
               <div className="md:w-[45%] xs:w-full ">
-                <h6 className={storageSty}>მეხსიერების ტიპი</h6>
+                <h6>მეხსიერების ტიპი</h6>
                 <label className="font-light">
                   <input
-                    onClick={() => setstorageStyle(true)}
                     className="my-5 mr-2 scale-125"
                     type="radio"
                     name="type"
@@ -276,7 +256,6 @@ const LaptopData = () => {
                 </label>
                 <label className="font-light">
                   <input
-                    onClick={() => setstorageStyle(true)}
                     type="radio"
                     className="my-5 scale-125 outline-[#62A1EB] ml-8 mr-2"
                     name="type"
@@ -287,40 +266,32 @@ const LaptopData = () => {
               </div>
             </div>
             <div className="w-full h-48 flex md:flex-row xs:flex-col justify-between items-center">
-              <label htmlFor="" className={`md:w-[45%] xs:w-full ${dateStyle}`}>
+              <label htmlFor="" className={`md:w-[45%] xs:w-full `}>
                 შეძენის რიცხვი
                 <Input
-                  connect={dateRef}
                   type={"date"}
-                  styyle={`w-full text-gray-400 md:h-11 xs:h-14 ${dateStyle}`}
+                  styyle={`w-full text-gray-400 md:h-11 xs:h-14`}
                 />
               </label>
-              <label
-                htmlFor=""
-                className={`md:w-[45%] xs:w-full mt-4 ${priceStyle}`}
-              >
+              <label htmlFor="" className={`md:w-[45%] xs:w-full mt-4 `}>
                 ლეპტოპის ფასი
                 <Input
-                  connect={priceRef}
                   type={"text"}
                   placeholder="0000"
-                  styyle={`w-full md:h-11 xs:h-14  ${priceStyle}`}
+                  styyle={`w-full md:h-11 xs:h-14  `}
                 />
                 <p
                   className={`relative bottom-8 md:left-[355px] xs:left-0 xs:ml-[330px] md:ml-0 text-gray-500 m-0 p-0`}
                 >
                   ₾
                 </p>
-                <p className={`text-xs mt-[-20px] ${priceStyle}`}>
-                  მხოლოდ ციფრები
-                </p>
+                <p className={`text-xs mt-[-20px] `}>მხოლოდ ციფრები</p>
               </label>
             </div>
             <div className="md:w-[45%] xs:w-full mt-6">
-              <h6 className={conditionText}>ლეპტოპის მდგომარეობა</h6>
+              <h6>ლეპტოპის მდგომარეობა</h6>
               <label className="font-light">
                 <input
-                onClick={()=>setcondition(true)}
                   className="my-5 mr-2 scale-125"
                   type="radio"
                   name="condition"
@@ -330,7 +301,6 @@ const LaptopData = () => {
               </label>
               <label className="font-light">
                 <input
-                onClick={()=>setcondition(true)}
                   type="radio"
                   className="my-5 scale-125 outline-[#62A1EB] ml-8 mr-2"
                   name="condition"

@@ -30,3 +30,16 @@ input[type='radio']:checked:after {
   visibility: visible;
   border: 2px solid white;
 }
+
+
+.error-input{
+  color: red;
+  border: 1px solid red;
+}
+.error-input:focus{
+  border: 1px solid red;
+  outline: 1px solid red;
+}
+.error-select{
+  border: 1px solid red;
+}

@@ -5,6 +5,7 @@ import Landing from "./pages/Landing";
 import LaptopData from "./pages/LaptopData";
 import List from "./pages/List";
 import Success from "./pages/Success";
+import NoPage from "./pages/NoPage";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/laptop-data" element={<LaptopData />} />
         <Route path="/success" element={<Success/>}/>
         <Route path="/list" element={<List />} />
+        <Route path="*" element={<NoPage/>} />
       </Routes>
     </div>
   );

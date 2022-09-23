@@ -55,6 +55,7 @@ const AddNew = () => {
         position_id: positionId,
         phone_number: formik.values.number,
         email: formik.values.mail,
+        token: '2c136363a8c02a83c7955be0864db980'
       };
       console.log(firstInfo);
       localStorage.setItem('data',JSON.stringify(firstInfo))

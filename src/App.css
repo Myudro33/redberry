@@ -43,3 +43,7 @@ input[type='radio']:checked:after {
 .error-select{
   border: 1px solid red;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

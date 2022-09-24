@@ -11,16 +11,13 @@ const List = () => {
   useEffect(() => {
     axios
       .get(
-        "https://pcfy.redberryinternship.ge/api/laptops?token=2c136363a8c02a83c7955be0864db980"
+        "https://pcfy.redberryinternship.ge/api/laptops?token=143d7d8b4901d87eb92e44547c358bad"
       )
       .then((response) => {
-        console.log(response.data.data);
         setdata(response.data.data);
       })
       .catch((error) => console.log(error));
   }, []);
-
-  console.log(data);
 
   return (
     <div className="w-full justify-center">
@@ -32,8 +29,8 @@ const List = () => {
         </Link>
         <h1 className="inline m-auto mt-4 text-2xl">ჩანაწერების სია</h1>
       </div>
-      <div className="md:w-2/3 xs:w-full h-fit m-auto mt-14 mb-16 flex justify-between flex-wrap md:p-5 xs:p-1">
-        {data.map((card) => (
+     {data.length>0?(<div className="md:w-2/3 xs:w-full h-fit m-auto mt-14 mb-16 flex justify-between flex-wrap md:p-5 xs:p-1">
+      {data.map((card) => (
           <Card
             key={card.laptop.id}
             name={card.laptop.name}
@@ -43,7 +40,9 @@ const List = () => {
             surname={card.user.surname}
           />
         ))}
-      </div>
+      </div>):(<div className="md:w-2/3 xs:w-full h-fit m-auto mt-14 mb-16 flex justify-between flex-wrap md:p-5 xs:p-1">
+      <h1 className="text-6xl mt-20 m-auto text-red-400">ჩანაწერები არარის :(</h1>
+      </div>)}
     </div>
   );
 };

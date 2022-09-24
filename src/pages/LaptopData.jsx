@@ -129,21 +129,6 @@ const LaptopData = () => {
       setbrandId(6);
     }
   };
-  const submitHandler = () => {
-    // const regex = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
-    // const numbersRegex = /^[0-9]*$/;
-    // setstore(form);
-    // console.log([...form.forEach()])
-    // setstore((store) => ({ ...store, ...data }));
-    // console.log(store);
-    // axios
-      // .post("https://pcfy.redberryinternship.ge/api/laptop/create", store)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => console.log(error));
-  };
-
   return (
     <div className="flex items-center flex-col bg-slate-50">
       <div className=" flex md:mt-8 p-3 xs:items-center xs:p-0 w-full h-20">
@@ -269,7 +254,7 @@ const LaptopData = () => {
               </label>
               <select
                 onChangeCapture={formik.handleChange}
-                value={formik.values.laptop_brand}
+                onBlur={formik.handleBlur}
                 id="laptop_brand"
                 onChange={(e) => {
                   getBrandId(e.target.value);
@@ -278,7 +263,7 @@ const LaptopData = () => {
                   formik.errors.laptop_brand ? "error-select" : ""
                 }`}
               >
-                <option selected disabled value="ლეპტოპის ბრენდი">
+                <option selected disabled>
                   ლეპტოპის ბრენდი
                 </option>
                 {brands?.data.map((brand) => (
@@ -292,13 +277,13 @@ const LaptopData = () => {
             <div className="w-full flex md:flex-row xs:flex-col md:h-40 xs:h-80 md:mt-0 xs:mt-4 items-center xs:justify-between justify-between">
               <select
                 onChangeCapture={formik.handleChange}
-                value={formik.values.laptop_cpu}
+                onBlur={formik.handleBlur}
                 id="laptop_cpu"
                 className={`md:h-11 xs:h-14 md:w-[30%] xs:w-full mt-2 bg-gray-200  border-[2px] p-2 ${
                   formik.errors.laptop_cpu ? "error-select" : ""
                 }  rounded-md  focus:outline-none `}
               >
-                <option disabled selected value="CPU">
+                <option disabled selected>
                   CPU
                 </option>
                 {cpus?.map((cpu) => (

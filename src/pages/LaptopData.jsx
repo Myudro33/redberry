@@ -7,7 +7,7 @@ import Input from "../components/Input";
 import axios from "axios";
 import "../App.css";
 import ImageUploading from "react-images-uploading";
-import { useFormik,Field } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const LaptopData = () => {
@@ -17,13 +17,12 @@ const LaptopData = () => {
   const navigate = useNavigate()
   const data = JSON.parse(localStorage.getItem("data"))
   const formData  = new FormData() 
-  const [border, setBorder] = useState(true);
+
   const [images, setImages] = React.useState([]);
-  // console.log(images.length>0?true:false);
+
   const maxNumber = 1;
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    // console.log(imageList, addUpdateIndex);
+
     setImages(imageList);
   };
   
@@ -94,7 +93,7 @@ const LaptopData = () => {
   });
 
   
-  // console.log(formik.errors, formik.values);
+
   useEffect(() => {
     // cpus
     axios
@@ -230,20 +229,23 @@ const LaptopData = () => {
               <label
                 htmlFor="inp"
                 className={`md:w-[45%] xs:w-full ${
-                  formik.errors.laptop_name ? "text-red-600" : ""
+                  formik.errors.laptop_name&&formik.touched.laptop_name ? "text-red-600" : ""
                 }`}
               >
                 ლეპტოპის სახელი
                 <Input
+                blur={formik.handleBlur}
                   click={formik.handleChange}
                   valu={formik.values.laptop_name}
                   idd="laptop_name"
                   type={"text"}
                   placeholder="HP"
                   styyle={`w-full xs:h-14 md:h-11 ${
-                    formik.errors.laptop_name ? "error-input" : ""
+                    formik.errors.laptop_name&&formik.touched.laptop_name ? "error-input" : ""
                   }`}
                 />
+                {formik.touched.laptop_name&&(
+
                 <p
                   className={`text-xs ${
                     formik.errors.laptop_name ? "text-red-600" : ""
@@ -251,6 +253,7 @@ const LaptopData = () => {
                 >
                   {formik.errors.laptop_name}
                 </p>
+                )}
               </label>
               <select
                 onChangeCapture={formik.handleChange}
@@ -259,8 +262,8 @@ const LaptopData = () => {
                 onChange={(e) => {
                   getBrandId(e.target.value);
                 }}
-                className={`md:w-[45%] xs:w-full bg-gray-200 md:h-11 xs:h-14  mt-2 border-2 p-2  rounded-md  focus:outline-none ${
-                  formik.errors.laptop_brand ? "error-select" : ""
+                className={`md:w-[45%] xs:w-full bg-gray-200 md:h-11 xs:h-14  xs:mt-2 md:mt-6 border-2 p-2  rounded-md  focus:outline-none ${
+                  formik.errors.laptop_brand&&formik.touched.laptop_brand ? "error-select" : ""
                 }`}
               >
                 <option selected disabled>
@@ -279,8 +282,8 @@ const LaptopData = () => {
                 onChangeCapture={formik.handleChange}
                 onBlur={formik.handleBlur}
                 id="laptop_cpu"
-                className={`md:h-11 xs:h-14 md:w-[30%] xs:w-full mt-2 bg-gray-200  border-[2px] p-2 ${
-                  formik.errors.laptop_cpu ? "error-select" : ""
+                className={`md:h-11 xs:h-14 md:w-[30%] xs:w-full mt-6 bg-gray-200   border-[2px] p-2 ${
+                  formik.errors.laptop_cpu&& formik.touched.laptop_cpu ? "error-select" : ""
                 }  rounded-md  focus:outline-none `}
               >
                 <option disabled selected>
@@ -295,74 +298,85 @@ const LaptopData = () => {
               <label
                 htmlFor=""
                 className={`md:w-[30%] xs:w-full ${
-                  formik.errors.laptop_cpu_cores ? "text-red-600" : ""
+                  formik.errors.laptop_cpu_cores&&formik.touched.laptop_cpu_cores ? "text-red-600" : ""
                 }`}
               >
                 CPU-ს ბირთვი
                 <Input
+                blur={formik.handleBlur}
                   click={formik.handleChange}
                   valu={formik.values.laptop_cpu_cores}
                   idd="laptop_cpu_cores"
                   placeholder={"14"}
                   styyle={`w-full md:h-11 xs:h-14 ${
-                    formik.errors.laptop_cpu_cores ? "error-input" : ""
+                    formik.errors.laptop_cpu_cores&&formik.touched.laptop_cpu_cores ? "error-input" : ""
                   }`}
                   type="text"
                 />
-                <p
+                {formik.touched.laptop_cpu_cores&&(
+                    <p
                   className={`text-xs ${
                     formik.errors.laptop_cpu_cores ? "text-red-600" : ""
                   }`}
                 >
                   {formik.errors.laptop_cpu_cores}
                 </p>
+                )}
+              
               </label>
               <label
                 htmlFor=""
                 className={`md:w-[30%] xs:w-full  ${
-                  formik.errors.laptop_cpu_threads ? "text-red-600" : ""
+                  formik.errors.laptop_cpu_threads&&formik.touched.laptop_cpu_threads ? "text-red-600" : ""
                 }`}
               >
                 CPU-ს ნაკადი
                 <Input
+                blur={formik.handleBlur}
                   click={formik.handleChange}
                   valu={formik.values.laptop_cpu_threads}
                   idd="laptop_cpu_threads"
                   placeholder={"365"}
                   styyle={`w-full md:h-11 xs:h-14 ${
-                    formik.errors.laptop_cpu_threads ? "error-input" : ""
+                    formik.errors.laptop_cpu_threads&&formik.touched.laptop_cpu_threads ? "error-input" : ""
                   }`}
                   type="text"
                 />
-                <p
+                {formik.touched.laptop_cpu_threads&&(
+                    <p
                   className={`text-xs ${
                     formik.errors.laptop_cpu_threads ? "text-red-600" : ""
                   }`}
                 >
                   {formik.errors.laptop_cpu_threads}
                 </p>
+                )}
+              
               </label>
             </div>
             <div className="w-full h-48  md:border-b-2 xs:border-b-4 md:my-0 xs:my-6 border-b-gray-300 flex md:flex-row xs:flex-col justify-between items-center">
               <label
                 htmlFor=""
                 className={`md:w-[45%] xs:w-full ${
-                  formik.errors.laptop_ram ? "text-red-600" : ""
+                  formik.errors.laptop_ram&&formik.touched.laptop_ram ? "text-red-600" : ""
                 }`}
               >
                 ლეპტოპის RAM(GB)
                 <Input
+                blur={formik.handleBlur}
                   click={formik.handleChange}
                   valu={formik.values.laptop_ram}
                   idd="laptop_ram"
                   placeholder={"365"}
-                  styyle={`w-full md:h-11 xs:h-14 ${formik.errors.laptop_ram?'error-input':''}`}
+                  styyle={`w-full md:h-11 xs:h-14 ${formik.errors.laptop_ram&&formik.touched.laptop_ram?'error-input':''}`}
                   type="text"
                 />
-                <p className={`text-xs ${formik.errors.laptop_ram?'text-red-600':''}`}>{formik.errors.laptop_ram}</p>
+                {formik.touched.laptop_ram&&(
+                  <p className={`text-xs ${formik.errors.laptop_ram?'text-red-600':''}`}>{formik.errors.laptop_ram}</p>
+                )}
               </label>
               <div role='group' aria-labelledby="my-radio-group" className="md:w-[45%] xs:w-full ">
-                <h6 className={`${formik.errors.laptop_hard_drive_type?'text-red-600':''}`}>მეხსიერების ტიპი</h6>
+                <h6 className={`${formik.errors.laptop_hard_drive_type&&formik.touched.laptop_hard_drive_type?'text-red-600':''}`}>მეხსიერების ტიპი</h6>
                 <label className="font-light">
                   <input
                     className="my-5 mr-2 scale-125"
@@ -386,36 +400,40 @@ const LaptopData = () => {
               </div>
             </div>
             <div className="w-full h-48 flex md:flex-row xs:flex-col justify-between items-center">
-              <label htmlFor="" className={`md:w-[45%] xs:w-full  ${formik.errors.laptop_purchase_date?'text-red-600':''}`}>
+              <label htmlFor="" className={`md:w-[45%]  xs:w-full  ${formik.errors.laptop_purchase_date&&formik.touched.laptop_purchase_date?'text-red-600':''}`}>
                 შეძენის რიცხვი
                 <Input
+                blur={formik.handleBlur}
                   click={formik.handleChange}
                   valu={formik.values.laptop_purchase_date}
                   idd='laptop_purchase_date'
                   type={"date"}
-                  styyle={`w-full text-gray-400 md:h-11 xs:h-14 ${formik.errors.laptop_purchase_date?'error-input':''}`}
+                  styyle={`w-full  text-gray-400 md:h-11 xs:h-14 ${formik.errors.laptop_purchase_date&&formik.touched.laptop_purchase_date?'error-input':''}`}
                 />
               </label>
-              <label htmlFor="" className={`md:w-[45%] xs:w-full mt-4 ${formik.errors.laptop_price?'text-red-600':''}`}>
+              <label htmlFor="" className={`md:w-[45%] xs:w-full mt-5 ${formik.errors.laptop_price&&formik.touched.laptop_price?'text-red-600':''}`}>
                 ლეპტოპის ფასი
                 <Input
+                blur={formik.handleBlur}
                 click={formik.handleChange}
                 valu={formik.values.laptop_price}
                 idd='laptop_price'
                   type={"text"}
                   placeholder="0000"
-                  styyle={`w-full md:h-11 xs:h-14  ${formik.errors.laptop_price?'error-input':''}`}
+                  styyle={`w-full md:h-11 xs:h-14  ${formik.errors.laptop_price&&formik.touched.laptop_price?'error-input':''}`}
                 />
                 <p
                   className={`relative bottom-8 md:left-[355px] xs:left-0 xs:ml-[330px] md:ml-0 text-gray-500 m-0 p-0`}
                 >
                   ₾
                 </p>
-                <p className={`text-xs mt-[-20px] ${formik.errors.laptop_price?'text-red-600':''} `}>{formik.errors.laptop_price}</p>
+                {formik.touched.laptop_price&&(
+                  <p className={`text-xs mt-[-20px] ${formik.errors.laptop_price?'text-red-600':''} `}>{formik.errors.laptop_price}</p>
+                )}
               </label>
             </div>
             <div className="md:w-[45%] xs:w-full mt-6">
-              <h6 className={formik.errors.laptop_state?'text-red-600':""} >ლეპტოპის მდგომარეობა</h6>
+              <h6 className={formik.errors.laptop_state&&formik.touched.laptop_state?'text-red-600':""} >ლეპტოპის მდგომარეობა</h6>
               <label className="font-light">
                 <input
                   className="my-5 mr-2 scale-125"
@@ -438,9 +456,9 @@ const LaptopData = () => {
               </label>
             </div>
             <div className="flex justify-between items-center mt-10">
-              <a className="text-[#62A1EB]" href="/add-new">
+              <Link className="text-[#62A1EB]" to={"/add-new"}>
                 უკან
-              </a>
+              </Link>
               <Button
                 click={formik.handleSubmit}
                 type="submit"

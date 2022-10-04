@@ -55,11 +55,11 @@ const AddNew = () => {
         position_id: positionId,
         phone_number: formik.values.number,
         email: formik.values.mail,
-        token: '143d7d8b4901d87eb92e44547c358bad'
+        token: "143d7d8b4901d87eb92e44547c358bad",
       };
       console.log(firstInfo);
-      localStorage.setItem('data',JSON.stringify(firstInfo))
-      navigate('/laptop-data')
+      localStorage.setItem("data", JSON.stringify(firstInfo));
+      navigate("/laptop-data");
     },
   });
   useEffect(() => {
@@ -167,54 +167,70 @@ const AddNew = () => {
                 <label
                   style={{ fontFamily: "Helvetica", fontWeight: "bold" }}
                   htmlFor="saxeli"
-                  className={formik.errors.name ? "text-red-600" : ""}
+                  className={
+                    formik.errors.name && formik.touched.name
+                      ? "text-red-600"
+                      : ""
+                  }
                 >
                   სახელი
                 </label>
                 <Input
+                  blur={formik.handleBlur}
                   valu={formik.values.name}
                   click={formik.handleChange}
                   idd="name"
                   type={"text"}
                   placeholder="გრიშა"
                   styyle={`w-full h-12 ${
-                    formik.errors.name ? "error-input" : ""
+                    formik.errors.name && formik.touched.name
+                      ? "error-input"
+                      : ""
                   }`}
                 />
-                <p
-                  className={`text-xs ${
-                    formik.errors.name ? "text-red-600" : ""
-                  } `}
-                >
-                  {formik.errors.name}
-                </p>
+                {formik.touched.name && (
+                  <p
+                    className={`text-xs ${
+                      formik.errors.name ? "text-red-600" : ""
+                    } `}
+                  >
+                    {formik.errors.name}
+                  </p>
+                )}
               </div>
               <div className="md:w-[47%] xs:w-full xs:mt-5 md:mt-0">
                 <label
                   className={`font-bold ${
-                    formik.errors.lastName ? "text-red-600" : ""
+                    formik.errors.lastName && formik.touched.lastName
+                      ? "text-red-600"
+                      : ""
                   } `}
                   htmlFor="gvari"
                 >
                   გვარი
                 </label>
                 <Input
+                  blur={formik.handleBlur}
                   valu={formik.values.lastName}
                   click={formik.handleChange}
                   idd="lastName"
                   type={"text"}
                   placeholder="ბაგრატიონი"
                   styyle={`w-full h-12 ${
-                    formik.errors.lastName ? "error-input" : ""
+                    formik.errors.lastName && formik.touched.lastName
+                      ? "error-input"
+                      : ""
                   }`}
                 />
-                <p
-                  className={`text-xs ${
-                    formik.errors.lastName ? "text-red-600" : ""
-                  }`}
-                >
-                  {formik.errors.lastName}
-                </p>
+                {formik.touched.lastName && (
+                  <p
+                    className={`text-xs ${
+                      formik.errors.lastName ? "text-red-600" : ""
+                    }`}
+                  >
+                    {formik.errors.lastName}
+                  </p>
+                )}
               </div>
             </div>
             <select
@@ -223,7 +239,7 @@ const AddNew = () => {
               onBlur={formik.handleBlur}
               onChange={setPosition}
               className={`w-full md:h-12 xs:h-12 p-2 rounded-md bg-gray-200 border mt-8 focus:outline-none ${
-                formik.errors.team ? "error-select" : ""
+                formik.errors.team&&formik.touched.team ? "error-select" : ""
               } `}
             >
               <option selected disabled>
@@ -243,7 +259,7 @@ const AddNew = () => {
                 getPositionId(e.target.value);
               }}
               className={`w-full border  mb-10 md:h-12 p-2 xs:h-12 rounded-md bg-gray-200 mt-8 focus:outline-none ${
-                formik.errors.position ? "error-select" : ""
+                formik.errors.position&&formik.touched.position ? "error-select" : ""
               } `}
             >
               <option selected disabled>
@@ -259,20 +275,22 @@ const AddNew = () => {
             </select>
             <label
               className={`font-bold ${
-                formik.errors.mail ? "text-red-600" : ""
+                formik.errors.mail&&formik.touched.mail ? "text-red-600" : ""
               }`}
               htmlFor="mail"
             >
               მეილი
             </label>
             <Input
+            blur={formik.handleBlur}
               idd={"mail"}
               valu={formik.values.mail}
               click={formik.handleChange}
               type={"mail"}
               placeholder="grish666@redberry.ge"
-              styyle={`w-full h-12  ${formik.errors.mail ? "error-input" : ""}`}
+              styyle={`w-full h-12  ${formik.errors.mail&&formik.touched.mail ? "error-input" : ""}`}
             />
+            {formik.touched.mail?(
             <p
               className={`text-xs mb-10 ${
                 formik.errors.mail ? "text-red-600" : ""
@@ -280,24 +298,29 @@ const AddNew = () => {
             >
               {formik.errors.mail}
             </p>
+            ):(
+              <p className="mb-10"></p>
+            )}
             <label
-              className={`font-bold ${
-                formik.errors.number ? "text-red-600" : ""
+              className={`font-bold  ${
+                formik.errors.number&&formik.touched.number ? "text-red-600" : ""
               }`}
               htmlFor="mail"
             >
               ტელეფონის ნომერი
             </label>
             <Input
+            blur={formik.handleBlur}
               idd={"number"}
               valu={formik.values.number}
               click={formik.handleChange}
               type={"mail"}
               placeholder="+995 571 17 36 33"
               styyle={`w-full h-12 ${
-                formik.errors.number ? "error-input" : ""
+                formik.errors.number&&formik.touched.number ? "error-input" : ""
               }`}
             />
+            {formik.touched.number&&(
             <p
               className={`text-xs ${
                 formik.errors.number ? "text-red-600" : ""
@@ -305,6 +328,7 @@ const AddNew = () => {
             >
               {formik.errors.number}
             </p>
+            )}
           </form>
           <div className="w-full flex mt-8  justify-end">
             <Button

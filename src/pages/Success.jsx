@@ -49,7 +49,7 @@ const Success = () => {
 <Link to={'/redberry/#/list'}>
 <Button title={'სიაში გადაყვანა'} styyle='md:w-44 xs:w-72 xs:h-14 md:h-11 xs:text-xl md:text-base md:mt-10 xs:mt-44' />
 </Link>
-<a className="md:mt-5 xs:mt-20 xs:text-xl md:text-base text-[#62A1EB]" href="/">მთავარი</a>
+<Link className="md:mt-5 xs:mt-20 xs:text-xl md:text-base text-[#62A1EB]" to={"/"} >მთავარი</Link>
 
 </div>
 </div>;

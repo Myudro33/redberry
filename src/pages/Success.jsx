@@ -46,7 +46,7 @@ const Success = () => {
 <div className="md:w-1/2 xs:w-full xs:h-full md:rounded-md md:h-1/2 bg-white flex flex-col items-center xs:justify-center">
   <img src={frame} alt="frame" className="md:h-44 xs:h-72" />
   <p className="text-center xs:text-2xl md:text-base">ჩანაწერი <br className="md:hidden"/> დამატებულია!</p>
-<Link to={'/list'}>
+<Link to={'/redberry/#/list'}>
 <Button title={'სიაში გადაყვანა'} styyle='md:w-44 xs:w-72 xs:h-14 md:h-11 xs:text-xl md:text-base md:mt-10 xs:mt-44' />
 </Link>
 <a className="md:mt-5 xs:mt-20 xs:text-xl md:text-base text-[#62A1EB]" href="/">მთავარი</a>
